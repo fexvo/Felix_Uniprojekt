@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- felxible Größe für verschiedene Bildschirme -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Umlaute sind möglich -->
+  <meta charset="utf-8">
+
+  <!-- bessere Übersicht für die Gruppenarbeit, immer aktualisieren -->
+  <meta name="author" content="Maileen Krähe">
+  <meta name="date" content="2021-04-07 T11:30">
+
+  <!-- Einbindung von dem CSS Dokument -->
+  <link href="main_Spiel.css" type="text/css" rel="stylesheet">
+
+<!-- Einbindung von dem Java Dokument -->
+    <script src="cookietracker.js" language="javascript" type="text/javascript"></script>
+    <STYLE>A {text-decoration: none;} </STYLE>
+</head>
+<body onload="getScore()">
+
+
+<div class="container">
+         <!-- Inhalte auf die jeweiligen Sektionen verteilen -->
+        <div class="Menue"></div>
+        <div class="Frage">Nachdem der Ausstoß der Klimagase Kohlendioxid (CO₂), Methan (CH4) und Lachgas (N₂O) aus dem Verkehrssektor in den 90er Jahren bis 1999 zunächst (1)_________, (2)______ er in den Folgejahren.</div>
+        <div class="Inhalt-Links"></div>
+        <div class="Inhalt-Mitte">
+           <!-- ID sollte gleich bleiben, WortFeedback(*Zahl*) Wort und Zahl immer im Java Script anpassen  -->
+           <button class="response-number" id="A" onclick=StromFeedback1(this.id)>(1) stagnierte, (2) stieg</button>
+           <button class="response-number" id="B" onclick=StromFeedback1(this.id)>(1) sank, (2) stieg</button>
+           <button class="response-number" id="C" onclick=StromFeedback1(this.id)>(1) stagnierte, (2) sank</button>
+           <button class="response-number" id="D" onclick=StromFeedback1(this.id)>(1) anstieg, (2) sank</button>
+        </div>
+        <div class="Inhalt-Rechts"></div>
+        <!-- "weiter" Button zeigt sich erst nach Auswahl einer Antwort  -->
+        <div class="footer"><div class="footer">
+          <input type="button" class="start" id="weiter" style="visibility: hidden;" disabled value="Weiter" onclick="window.location.href = '21_2_Uebung_Strom.html'"></input>
+
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- felxible Größe für verschiedene Bildschirme -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Umlaute sind möglich -->
+  <meta charset="utf-8">
+
+  <!-- bessere Übersicht für die Gruppenarbeit, immer aktualisieren -->
+  <meta name="author" content="Maileen Krähe">
+  <meta name="date" content="2021-04-07 T11:30">
+
+  <!-- Einbindung von dem CSS Dokument -->
+  <link href="main_Spiel.css" type="text/css" rel="stylesheet">
+
+<!-- Einbindung von dem Java Dokument -->
+    <script src="cookietracker.js" language="javascript" type="text/javascript"></script>
+    <STYLE>A {text-decoration: none;} </STYLE>
+</head>
+<body onload="getScore()">
+
+
+<div class="container">
+         <!-- Inhalte auf die jeweiligen Sektionen verteilen -->
+        <div class="Menue"></div>
+        <div class="Frage">Wie hoch war der Anteil der Solarthermie an der Wärmebereitstellung aus erneuerbaren Energien in Deutschland im Jahr 2019?</div>
+        <div class="Inhalt-Links"></div>
+        <div class="Inhalt-Mitte">
+           <!-- ID sollte gleich bleiben, WortFeedback(*Zahl*) Wort und Zahl immer im Java Script anpassen  -->
+           <button class="response-number" id="A" onclick=StromFeedback4(this.id)>ca. 5 % und damit wurden ca. 2 Millionen Tonnen Treibhausgase vermieden</button>
+           <button class="response-number" id="B" onclick=StromFeedback4(this.id)>ca. 5 % und damit wurden ca.  12 Millionen Tonnen Treibhausgase vermieden</button>
+           <button class="response-number" id="C" onclick=StromFeedback4(this.id)>ca. 20 % und damit wurden ca. 2 Millionen Tonnen  Treibhausgase vermieden</button>
+           <button class="response-number" id="D" onclick=StromFeedback4(this.id)>ca. 20 % und damit wurden ca. 12 Millionen Tonnen Treibhausgase vermieden</button>
+        </div>
+        <div class="Inhalt-Rechts"></div>
+        <!-- "weiter" Button zeigt sich erst nach Auswahl einer Antwort  -->
+        <div class="footer"><div class="footer">
+          <input type="button" class="start" id="weiter" style="visibility: hidden;" disabled value="Weiter" onclick="window.location.href = '24_1_Lebensmittel.html'"></input>
+
+        </div>
+
+</body>
+</html>
