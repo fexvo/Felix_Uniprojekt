@@ -748,7 +748,7 @@ function playAudio(track){
     }
 
     function checkCookie() {
-      var counter=getCookie("counter");
+      var counter = getCookie("counter");
       if (counter != "") {
         alert("This is your current score " + counter);
       } else {
@@ -761,7 +761,7 @@ function playAudio(track){
     }
 
     //neue Fragevariablen hier einfügen
-    var score = 0;
+    var score = "0";
     var folgen1ID = "0";
     var folgen2ID = "0";
     var folgen3ID = "0";
@@ -778,6 +778,8 @@ function playAudio(track){
     var recycling2ID = "0";
     var recycling3ID = "0";
     var recycling4ID = "0";
+    var nicknameID = "0";
+    var einstieg1ID = "A";
 
 
     //Get current score by loading cookies
@@ -798,12 +800,28 @@ function playAudio(track){
       recycling1ID = getCookie("recycling1ID");
       recycling2ID = getCookie("recycling2ID");
       recycling3ID = getCookie("recycling3ID");
-      recycling4ID = getCookie("recycling4ID");
+      recycling4ID = getCookie("recycling4ID");     
 
 
 
         alert("This is the current score: "+ score + "Folgen KLimawandel 1.Frage: "+ folgen1ID +"Folgen KLimawandel 2.Frage: "+ folgen2ID + "Folgen KLimawandel 3.Frage: "+ folgen3ID + "Folgen KLimawandel 4.Frage: "+ folgen4ID + "CO2 und Strom 1.Frage: "+ strom1ID +"CO2 und Strom 2.Frage: "+ strom2ID + "CO2 und Strom 3.Frage: "+ strom3ID + "CO2 und Strom 4.Frage: "+ strom4ID + "Auswirkungen Lebensmittelindustrie 1.Frage: "+ lebensmittel1ID +"Auswirkungen Lebensmittelindustrie 2.Frage: "+ lebensmittel2ID + "Auswirkungen Lebensmittelindustrie 3.Frage: "+ lebensmittel3ID + "Auswirkungen Lebensmittelindustrie 4.Frage: "+ lebensmittel4ID + "Recycling 1.Frage: "+ recycling1ID +"Recycling 2.Frage: "+ recycling2ID + "Recycling 3.Frage: "+ recycling3ID + "Recycling 4.Frage: "+ recycling4ID);
 
+    }
+
+    //Get Cookie for Nickname
+    function getCookieValue(){
+      nicknameID = getCookie("nicknameID");
+    }
+    
+   //Get Cookie for Einstieg-Achievement
+  function getCookieValue1(){
+      einstieg1ID = getCookie("einstieg1ID");
+    
+  }
+
+    function setEinstieg1ID(clicked_id) {
+        einstieg1ID = clicked_id;
+        setCookie("einstieg1ID", einstieg1ID, 30);
     }
 
     //Set new score by adding +1 point
@@ -906,6 +924,387 @@ function playAudio(track){
         function setRecycling4ID(clicked_id4) {
           recycling4ID = clicked_id4;
           setCookie("recycling4ID", recycling4ID, 30);
+        
+        }
+
+//Remove Cookies
+        function deleteScore(){
+            setCookie("score", score, 0)
         }
 
 
+
+//Set cookie for nickname
+        function addToMenu(safedNameId) {
+          nicknameID = safedNameId;
+          setCookie("nicknameID", nicknameID, 30);
+        }
+
+//Achievements manipulieren
+
+    
+//Funktion um Daumen anzeigen zu lassen, nachdem Tutorialfrage richtig beantwortet wurde
+function Tutorial(elem){
+    
+    var currentImage = document.getElementById("Daumen");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (elem == "A") {
+        currentImage.setAttribute("src", "Achievements/Tutorial_Daumen.png");
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Tutorial.png");
+    }
+}
+function Einstieg1(elem) {
+        
+    setEinstieg1ID(elem);
+    
+ var currentImage = document.getElementById("Haken");
+    var imagesrc = currentImage.getAttribute("src");
+
+ 
+    if (elem == "A") {                                                                 //Antwort richtig, dann
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");          //Daumenhoch
+    }
+
+    else {                                                                              //Ansonsten Fragezeichen
+       currentImage.setAttribute("src", "Achievements/Eine_Frage.png");
+    }
+}
+
+
+function Einstieg2(elem) {
+    
+ var currentImage = document.getElementById("Haken");
+    var imagesrc = currentImage.getAttribute("src");
+        
+    if (elem == "B") {                                                                 //Antwort richtig, dann
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");          //Daumenhoch
+    }
+
+    else {                                                                              //Ansonsten Fragezeichen
+       currentImage.setAttribute("src", "Achievements/Eine_Frage.png");
+    }
+}
+
+
+//Funktion um Haken anzeigen zu lassen, nachdem erste Frage der Lernumgebung richtig beantwortet wurde
+//Wird nach jeder richtigen Frage abgefragt
+function Einstieg(FolgenFeedback1){
+    
+    var currentImage = document.getElementById("Haken");
+    var imagesrc = currentImage.getAttribute("src");
+        
+    if (FolgenFeedback1.value == "A" ) {                                                //Erste Antwort richtig, dann
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");          //Daumenhoch
+    }
+    else if (FolgenFeedback2.value == "B") {                                            //Zweite Antwort erst richtig
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (FolgenFeedback3.value == "D") {                                            //Dritte Anwort erst richtig
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (FolgenFeedback4.value == "D") {                                            //Vierte Antwort erst richtig
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (StromFeedback1.value == "D") {                                             //5. Antwort erst richtig 
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (StromFeedback2.value == "C") {                                             //6. Antwort erst richtig
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (StromFeedback3.value == "A") {                                             //7. Antwort erst richtig
+        currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");
+    }
+    else if (StromFeedback4.value == "A") {                                             //8. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (LebensmittelFeedback1.value == "B") {                                       //9. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");  
+    }
+    else if (LebensmittelFeedback2.value == "A") {                                       //10. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (LebensmittelFeedback3.value == "B") {                                       //11. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (LebensmittelFeedback4.value == "D") {                                       //12. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (RecyclingFeedback1.value == "B") {                                          //13. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (RecyclingFeedback2.value == "A") {                                          //14. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (RecyclingFeedback3.value == "B") {                                          //15.Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else if (RecyclingFeedback4.value == "C") {                                          //16. Antwort erst richtig
+         currentImage.setAttribute("src", "Achievements/Eine_Frage_Haken.png");                 
+    }
+    else {                                                                      //Ansonsten Fragezeichen
+       currentImage.setAttribute("src", "Achievements/Eine_Frage.png");
+    }
+}
+
+//Funktion um Flamme nach 3 richtigen Antworten anzeigen zu lassen
+//wird bei jeder richtigen Frage, ab 3. Frage abefragt
+function HotFlamme1(elem1,elem2,elem3) {
+    
+    setFolgen1ID;
+
+ var currentImage = document.getElementById("1Flamme");
+    var imagesrc = currentImage.getAttribute("src");
+        
+    if (elem1 == "A" && elem2 =="B" && elem3 =="C") {                                                                 //Antwort richtig, dann
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");          //Daumenhoch
+    }
+
+    else {                                                                              //Ansonsten Fragezeichen
+       currentImage.setAttribute("src", "Achievements/Hot_Streak.png");
+    }
+}
+
+
+
+function HotFlamme(){
+    
+    var currentImage = document.getElementById("1Flamme");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (FolgenFeedback1.value == "A" + FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D") {     //Ersten drei Antworten richtig, danach manuell abgefragt für immer die nächsten 3 Antworten
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");                          //Flamme
+    }
+    else if (FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (FolgenFeedback4.value == "B" + StromFeedback1.value == "D" + StromFeedback2.value == "C"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+     else if (StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else if (RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B" + RecyclingFeedback4.value == "C"){
+        currentImage.setAttribute("src", "Achievements/Hot_Streak_Flamme.png");
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Hot_Streak.png");
+    }
+}
+
+
+//Funktion um 2 Flammen nach 5 richtig beantworteten Fragen anzeigen zu lassen
+//wird bei jeder richtigen Frage, ab der fünften Frage abgefragt
+function HotterFlamme() {
+    
+    var currentImage = document.getElementById("2Flamme");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (FolgenFeedback1.value == "A" + FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D") {     //Ersten fünf Antworten richtig, danach manuell                                                                                                                                                                          //  abgefragt für immer die nächsten 5 Antworten 
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");                                                                                     //2 Flammen
+    }
+    else if (FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+     else if (StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else if (LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B" + RecyclingFeedback4.value == "C"){
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak_Flamme.png");
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Hotter_Streak.png");
+    }
+}
+
+
+//Funktion um 3 Flammen nach 7 richtig beantworteten Fragen anzeigen zu lassen
+//wird bei jeder richtigen Frage, ab der siebten Frage abgefragt
+function HottestFlamme() {
+    
+    var currentImage = document.getElementById("3Flamme");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (FolgenFeedback1.value == "A" + FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A") {                                                                                                                                                                  //Ersten sieben Antworten richtig, danach manuell                                                                                                                                                                        //  abgefragt für immer die nächsten 7 Antworten 
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");                                                                                     //3 Flammen
+    }
+    else if (FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    }
+    else if (FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else if (LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B" + RecyclingFeedback4.value == "C") {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak_Flamme.png");
+    } 
+    else {
+        currentImage.setAttribute("src", "Achievements/Hottest_Streak.png")
+    }
+}
+
+
+//Funktion um Abzeichen Medaille für den Bereich anzeigen zu lassen, wird bei Klick auf die letzte richtige Antwort aufgerufen      
+function Klimawandel() {
+    
+    var currentImage = document.getElementById("Klimawandel");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (FolgenFeedback1.value == "A" + FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D") {               //Alle Antworten des Bereichs richtig
+        currentImage.setAttribute("src", "Achievements/Folgen_des_Klimawandels_Medaille.png");                                                  //Medaille anzeigen lassen
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Folgen_des_Klimawandels.png");                                                           //Ansonsten wird Fragezeichen abgerufen
+    }
+}
+
+//Funktion um Abzeichen Medaille für den Bereich anzeigen zu lassen, wird bei Klick auf die letzte richtige Antwort aufgerufen  
+function Strom() {
+    
+    var currentImage = document.getElementById("Strom");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (StromFeedback1Feedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A") {          //Alle Antworten des Bereichs richtig
+        currentImage.setAttribute("src", "Achievements/Strom_und_CO2-Verbrauch_Medaille.png");                                                  //Medaille anzeigen lassen
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Strom_und_CO2-Verbrauch.png");                                                           // Ansonsten wird Fragezeichen abgerufen
+    }
+}
+    
+//Funktion um Abzeichen Medaille für den Bereich anzeigen zu lassen, wird bei Klick auf die letzte richtige Antwort aufgerufen    
+function Lebensmittel() {
+    
+    var currentImage = document.getElementById("Lebensmittel");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D") {  //Alle Antworten des Bereichs richtig
+        currentImage.setAttribute("src", "Achievements/Lebensmittel_Medaille.png");                                                                         //Medaille anzeigen lassen
+    }
+    
+    else {
+        currentImage.setAttribute("src", "Achievements/Lebensmittel.png");                                                                                   //Ansonsten wird Fragezeichen abgerufen
+    }
+    
+}
+    
+//Funktion um Abzeichen Medaille für den Bereich anzeigen zu lassen, wird bei Klick auf die letzte richtige Antwort aufgerufen  
+function Recycling() {
+    
+    var currentImage = document.getElementById("Recycling");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B" + RecyclingFeedback4.value == "C") {   //Alle Antworten des Bereichs richtig
+        currentImage.setAttribute("src", "Achievements/Recycling_Medaille.png");                                                                //Medaille anzeigen lassen
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Recycling.png");                                                                         //Ansonsten wird Fragezeichen abgerufen
+    }
+}
+
+//Funktion um Abzeichen für alle Fragen richtig beantwortet anzeigen zu lassen, wird bei Klick auf letzte richtige Antwort im Bereich Recycling aufgerufen
+function Allwissend() {
+    
+    var currentImage = document.getElementbyId("Allwissend");
+    var imagesrc = currentImage.getAttribute("src");
+    
+    if (FolgenFeedback1.value == "A" + FolgenFeedback2.value == "B" + FolgenFeedback3.value == "D" + FolgenFeedback4.value == "D" + StromFeedback1.value == "D" + StromFeedback2.value == "C" + StromFeedback3.value == "A" + StromFeedback4.value == "A" + LebensmittelFeedback1.value == "B" + LebensmittelFeedback2.value == "A" + LebensmittelFeedback3.value == "B" + LebensmittelFeedback4.value == "D" + RecyclingFeedback1.value == "B" + RecyclingFeedback2.value == "A" + RecyclingFeedback3.value == "B" + RecyclingFeedback4.value == "C") {                   //Alle Fragen richtig beantwortet
+        currentImage.setAttribute("src", "Achievements/Allwissend_Pokal.png");                                            //Pokal anzeigen lassen
+    }
+    else {
+        currentImage.setAttribute("src", "Achievements/Allwissend.png");                                                   //Ansonsten wird Fragezeichen abgerufen
+    }
+}
+//Nickname speichern und anzeigen lassen
+function showNickname(){
+  var nickname = getCookie("nicknameID"); //Gespeicherten Nickname abrufen
+  document.getElementById("username").innerHTML = nickname;  //div mit der id "username" mit dem abgerufenen Nickname befüllen
+  document.getElementById("nickname").value = ""; //Reset empty text input field
+}
+
+    
+//Streak anzeigen lassen
+function Streak() {
+    
+    var i = 0;
+    var ende = (FolgenFeedback1.value != "A" + FolgenFeedback2.value != "B" + FolgenFeedback3.value != "D" + FolgenFeedback4.value != "D" + StromFeedback1.value != "D" + StromFeedback2.value != "C" + StromFeedback3.value != "A" + StromFeedback4.value != "A" + LebensmittelFeedback1.value != "B" + LebensmittelFeedback2.value != "A" + LebensmittelFeedback3.value != "B" + LebensmittelFeedback4.value != "D" + RecyclingFeedback1.value != "B" + RecyclingFeedback2.value != "A" + RecyclingFeedback3.value != "B" + RecyclingFeedback4.value != "C")
+    
+var inv = setInterval(function() {     
+    if(i < ende)
+        
+        document.getElementById("counter").innerHTML = ++i;
+    
+    else
+        clearInterval(inv);
+}, 3000 / 100);
+}
